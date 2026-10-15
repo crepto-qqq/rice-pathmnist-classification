@@ -165,7 +165,18 @@ cython_debug/
 #  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
-#.idea/
+.idea/
+
+# COMP5318 Assignment 2 local data and generated model artefacts
+assignment2/Assignment2Data/
+assignment2/Assignment2Data-*.zip
+assignment2/models/
+assignment2/checkpoints/
+assignment2/logs/
+assignment2/*.keras
+assignment2/*.h5
+assignment2/*.pkl
+assignment2/*.joblib
 
 # Abstra
 # Abstra is an AI-powered process automation framework.

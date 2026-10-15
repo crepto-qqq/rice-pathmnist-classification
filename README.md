@@ -1,5 +1,9 @@
 # COMP5318 Assignment 1 - Rice Classification
 
+> This repository now contains work for both course assignments. Assignment 1
+> remains at the repository root; Assignment 2 is isolated in
+> [`assignment2/`](assignment2/README.md).
+
 ## Project Overview
 
 This repository is used for COMP5318 Assignment 1: Rice Classification.
