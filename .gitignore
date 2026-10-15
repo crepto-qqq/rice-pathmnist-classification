@@ -168,15 +168,15 @@ cython_debug/
 .idea/
 
 # COMP5318 Assignment 2 local data and generated model artefacts
-assignment2/Assignment2Data/
-assignment2/Assignment2Data-*.zip
-assignment2/models/
-assignment2/checkpoints/
-assignment2/logs/
-assignment2/*.keras
-assignment2/*.h5
-assignment2/*.pkl
-assignment2/*.joblib
+A2/Assignment2Data/
+A2/Assignment2Data-*.zip
+A2/models/
+A2/checkpoints/
+A2/logs/
+A2/*.keras
+A2/*.h5
+A2/*.pkl
+A2/*.joblib
 
 # Abstra
 # Abstra is an AI-powered process automation framework.

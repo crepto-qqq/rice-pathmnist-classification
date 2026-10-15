@@ -2,7 +2,7 @@
 
 This directory contains the shared work for Assignment 2 using the PathMNIST
 dataset. Keep Assignment 2 changes inside this directory so that the completed
-Assignment 1 submission remains unchanged.
+Assignment 1 submission remains unchanged in `A1/`.
 
 ## Source Materials
 

@@ -8,7 +8,7 @@ Each team member should download `Assignment2Data-1.zip` from Canvas and extract
 it so that the repository has this local structure:
 
 ```text
-assignment2/
+A2/
 |-- COMP5318-assignment2-template-notebook-1.ipynb
 `-- Assignment2Data/
     |-- X_train.npy
