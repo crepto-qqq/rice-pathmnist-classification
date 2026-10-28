@@ -1,0 +1,2 @@
+Model,Accuracy,Macro precision,Macro recall,Macro F1,Prediction time (s),Training time (s),n_estimators,max_features,max_depth
+Random Forest,0.655625,0.6579616144377917,0.6350125677526955,0.6204136563414254,1.1887815500003853,185.8732355279999,200,sqrt,None
