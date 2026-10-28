@@ -1,0 +1,2 @@
+Model,Accuracy,Macro precision,Macro recall,Macro F1,Prediction time (s),Training time (s),Parameters,Epochs run
+MLP,0.538375,0.5192497370555778,0.5220017520183804,0.5023059747120379,0.491735499817878,25.911695800255984,636425,19
