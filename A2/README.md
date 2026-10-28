@@ -49,3 +49,47 @@ The final group submission requires three files:
 - `a2-code-SID1-SID2-SID3-SID4.pdf`
 
 The report and notebook must both include the required AI acknowledgement.
+
+## MLP Implementation
+
+The MLP implementation is provided in `a2-mlp.ipynb`, including
+hyperparameter tuning, final-model training, and evaluation.
+
+### Files
+
+- `a2-mlp.ipynb`: notebook with code, explanations, and saved outputs.
+- `mlp_tuning_results.csv`: validation results and runtimes for eight configurations.
+- `mlp_final_results.csv`: final test metrics and runtime measurements.
+
+### Setup and execution
+
+Required packages: tensorflow, numpy, pandas, matplotlib, and scikit-learn.
+
+Place the assignment dataset in `A2/Assignment2Data/`, containing
+`X_train.npy`, `y_train.npy`, `X_test.npy`, and `y_test.npy`.
+The dataset is not included in Git.
+
+Run the notebook from top to bottom. To skip hyperparameter search,
+run the setup and Section 1, then the MLP cells in Section 2 and
+Section 4. Skip both the search and tuning-plot cells in Section 3.
+
+### Selected configuration
+
+- Hidden layers: 256 and 128 units, with ReLU activation
+- Output: 9 units, with softmax activation
+- Optimiser: Adam
+- Learning rate: 0.001
+- Batch size: 64
+- Maximum epochs: 20
+- Early stopping: validation accuracy, patience 3, best weights restored
+
+### Results
+
+- Best validation accuracy: 53.44%
+- Test accuracy: 53.84%
+- Test macro F1-score: 0.5023
+- Trainable parameters: 636,425
+
+The final MLP was successfully rerun after restarting the kernel
+and skipping Section 3, confirming that final training and
+evaluation do not depend on the hyperparameter-search cells.
