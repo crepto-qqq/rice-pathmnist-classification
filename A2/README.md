@@ -18,7 +18,7 @@ filename before submission.
 
 | Owner | Primary responsibility |
 | --- | --- |
-| Member A | Data exploration, preprocessing, validation split, and shared evaluation utilities |
+| Yuexiang Sun | Data exploration, preprocessing, validation split, and shared evaluation utilities |
 | Member B | First-six-weeks classifier and hyperparameter search |
 | Member C | MLP implementation and hyperparameter search |
 | Member D | CNN implementation and hyperparameter search |
