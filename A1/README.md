@@ -1,46 +1,40 @@
-# COMP5318 Assignment 1 - Rice Classification
+# A1 — Rice classification
 
-## Project Overview
+This notebook compares eight classical classifiers on a 1,400-row, seven-feature subset derived from UCI's Rice (Cammeo and Osmancik) dataset. It handles missing values, rescales features, applies stratified cross-validation and searches model parameters.
 
-This repository is used for COMP5318 Assignment 1: Rice Classification.
+## Files
 
-The assignment requires us to preprocess the provided rice dataset, implement and evaluate 8 classifiers, perform hyperparameter tuning for selected models, and write a short reflection and discussion.
+- [ml-project-group217.ipynb](ml-project-group217.ipynb): implementation and saved outputs.
+- [clean_dataset/rice-final2.csv](clean_dataset/rice-final2.csv): supplied derivative dataset, with attribution below.
+- [requirements.txt](requirements.txt): pandas and scikit-learn dependencies.
 
-## Assignment Requirements
+## Run locally
 
-### Data Preprocessing
+From the repository root, create and select a Python environment. In PowerShell:
 
-Use `rice-final2.csv` and complete the following preprocessing steps:
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r A1/requirements.txt
+```
 
-1. Replace missing values (`?`) with the mean value of each column using `SimpleImputer`.
-2. Normalize feature values to `[0, 1]` using `MinMaxScaler`.
-3. Convert class labels:
-   - `class1 -> 0`
-   - `class2 -> 1`
-4. Print the first 10 rows of the processed dataset.
-5. Do not hard-code the number or names of features.
+Open the notebook in Jupyter or a notebook-capable editor using that interpreter. Ensure its working directory is `A1/`: the notebook first looks for `rice-final2.csv`, then `clean_dataset/rice-final2.csv`. Run cells in order. Parameter-search cells can take longer than preprocessing or the two baseline classifiers.
 
-The code must also work with datasets that have a different number of features.
+The preprocessing function treats the last column as labels (`class1` and `class2`) and the preceding columns as features. It fills `?` cells with feature means and rescales features to [0, 1]. The unverified historical `test-before.csv` fixture is not distributed.
 
----
+## Methods
 
-## Classifiers
+- Logistic regression and Gaussian naive Bayes: stratified ten-fold cross-validation.
+- KNN, decision tree, random forest, AdaBoost, gradient boosting and SVM: model-specific parameter search and recorded holdout results.
+- Reusable functions for preprocessing and printing arbitrary-width feature tables.
 
-We need to evaluate 8 classifiers.
+## Evaluation limitation
 
-### Part 1 - Cross-validation without Hyperparameter Tuning
+The original notebook fits imputation and scaling on the complete dataset before cross-validation and the train/test split. This can leak distributional information. The implementation and saved outputs are preserved as coursework evidence; the recorded scores should not be described as leakage-free generalisation estimates.
 
-- Logistic Regression
-- Naive Bayes
+An improved future experiment would put imputation/scaling inside a scikit-learn Pipeline fitted separately within each training fold. That methodological change has not been silently applied to the original results.
 
-Requirements:
+## Dataset attribution
 
-- Use 10-fold Stratified Cross-Validation.
-- Use:
+Original dataset: **Rice (Cammeo and Osmancik)**, UCI Machine Learning Repository, [DOI 10.24432/C5MW4Z](https://doi.org/10.24432/C5MW4Z), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). See [full attribution](../THIRD_PARTY_NOTICES.md).
 
-```python
-cvKFold = StratifiedKFold(
-    n_splits=10,
-    shuffle=True,
-    random_state=0
-)
+The included course subset has 1,400 rows, renamed labels (`class1`/Cammeo, `class2`/Osmancik), and 29 missing feature cells. All nonmissing feature values matched the official dataset in a provenance comparison. The original course column spelling is retained; the exact subset-selection/missing-value procedure is not established.

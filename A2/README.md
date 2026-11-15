@@ -1,95 +1,42 @@
-# COMP5318 Assignment 2 - Image Classification
+# A2 — PathMNIST image classification
 
-This directory contains the shared work for Assignment 2 using the PathMNIST
-dataset. Keep Assignment 2 changes inside this directory so that the completed
-Assignment 1 submission remains unchanged in `A1/`.
+The public snapshot brings together the random-forest and MLP work from the school main branch and the CNN work from its separate committed `a2/cnn` branch.
 
-## Source Materials
+## Choose a model
 
-- `COMP5318-assignment2-Sem2-2026-2.pdf`: official assignment specification
-- `COMP5318-assignment2-template-notebook-1.ipynb`: unmodified notebook template
-- `data/README.md`: local dataset setup instructions
+| Model | Notebook | Supporting results |
+| --- | --- | --- |
+| Random forest | [a2-random_forest.ipynb](a2-random_forest.ipynb) | [Tuning CSV](rf_tuning_results.csv), [final CSV](rf_final_results.csv) |
+| MLP | [a2-mlp.ipynb](a2-mlp.ipynb) | [Tuning CSV](mlp_tuning_results.csv), [final CSV](mlp_final_results.csv) |
+| CNN | [a2-code-group217.ipynb](a2-code-group217.ipynb) | Search and final-evaluation outputs inside the notebook |
 
-The original template is kept unchanged as a reference. Create the group working
-notebook from this file when implementation begins, then use the required final
-filename before submission.
+The original CNN filename is retained for traceability. It is the committed CNN-focused notebook, not a claim that an uncommitted final combined submission was imported.
 
-## Team Responsibilities
+## Environment and data
 
-| Owner | Primary responsibility |
-| --- | --- |
-| Yuexiang Sun | Data exploration, preprocessing, validation split, and shared evaluation utilities |
-| Member B | First-six-weeks classifier and hyperparameter search |
-| Member C | MLP implementation and hyperparameter search |
-| Member D | CNN implementation and hyperparameter search |
+The [requirements.txt](requirements.txt) file comes from the CNN branch and provides pinned versions of TensorFlow, NumPy, Matplotlib, pandas, scikit-learn, ipykernel and nbclient. The original CNN environment was Python 3.10 on Windows with CPU TensorFlow.
 
-All members review the final comparison, discussion, conclusion, references,
-and submission files. Each member writes their own reflection.
+From the repository root, for example in PowerShell:
 
-## Working Conventions
+```powershell
+py -3.10 -m venv .venv-a2
+.\.venv-a2\Scripts\python.exe -m pip install -r A2/requirements.txt
+```
 
-1. Create a feature branch from the latest `main` before starting a task.
-2. Keep one primary owner for each notebook section to reduce merge conflicts.
-3. Do not commit datasets, virtual environments, checkpoints, or trained models.
-4. Use fixed random seeds and a shared stratified train/validation split.
-5. Keep the supplied test set untouched until final model evaluation.
-6. Record every tuning combination, validation result, and runtime.
-7. Keep expensive tuning cells independent from final-model cells.
-8. Before merging, restart the kernel and run all non-search cells in order.
+Select this interpreter in a notebook-capable editor. JupyterLab itself is not included in the pinned requirements; install it separately if using that interface.
 
-Suggested branch names include `a2/data-pipeline`, `a2/classical-model`,
-`a2/mlp`, and `a2/cnn`.
+Obtain the supplied arrays as described in [data/README.md](data/README.md). Start notebooks with **`A2/` as the working directory**. They load `Assignment2Data/X_train.npy`, `y_train.npy`, `X_test.npy`, and `y_test.npy`.
 
-## Submission Outputs
+Images must be 28 x 28 RGB arrays. The notebooks expect one-dimensional integer labels 0 through 8. The saved experiments used 32,000 supplied training images and 8,000 test images; 20% of the supplied training set was reserved through a stratified split for validation.
 
-The final group submission requires three files:
+## Execution
 
-- `A2-report-SID1-SID2-SID3-SID4.pdf`
-- `a2-code-SID1-SID2-SID3-SID4.ipynb`
-- `a2-code-SID1-SID2-SID3-SID4.pdf`
+Inspect the saved outputs before launching new training. Run setup, data loading, validation, preprocessing, and model-definition cells first. Section 3 performs hyperparameter search; it is intentionally separate from the final-model cells. When skipping search, also skip its result-plot cells, then run the final-model section in sequence. Read each notebook's headings because model-specific cell layouts differ.
 
-The report and notebook must both include the required AI acknowledgement.
+CNN search uses eight configurations, a fixed 6,000-image training subset and a maximum of five epochs per candidate. Final CNN training uses the full 25,600-image training split, validation-based early stopping and a separate test evaluation. The MLP and RF use their own parameter searches. Model-search validation scores and final test scores are not a controlled before/after comparison.
 
-## MLP Implementation
+No datasets, trained weights or checkpoints are bundled. This publication did not rerun all searches or retrain every model. [Validation](../docs/VALIDATION.md) records the checks actually performed.
 
-The MLP implementation is provided in `a2-mlp.ipynb`, including
-hyperparameter tuning, final-model training, and evaluation.
+## Results and attribution
 
-### Files
-
-- `a2-mlp.ipynb`: notebook with code, explanations, and saved outputs.
-- `mlp_tuning_results.csv`: validation results and runtimes for eight configurations.
-- `mlp_final_results.csv`: final test metrics and runtime measurements.
-
-### Setup and execution
-
-Required packages: tensorflow, numpy, pandas, matplotlib, and scikit-learn.
-
-Place the assignment dataset in `A2/Assignment2Data/`, containing
-`X_train.npy`, `y_train.npy`, `X_test.npy`, and `y_test.npy`.
-The dataset is not included in Git.
-
-Run the notebook from top to bottom. To skip hyperparameter search,
-run the setup and Section 1, then the MLP cells in Section 2 and
-Section 4. Skip both the search and tuning-plot cells in Section 3.
-
-### Selected configuration
-
-- Hidden layers: 256 and 128 units, with ReLU activation
-- Output: 9 units, with softmax activation
-- Optimiser: Adam
-- Learning rate: 0.001
-- Batch size: 64
-- Maximum epochs: 20
-- Early stopping: validation accuracy, patience 3, best weights restored
-
-### Results
-
-- Best validation accuracy: 53.44%
-- Test accuracy: 53.84%
-- Test macro F1-score: 0.5023
-- Trainable parameters: 636,425
-
-The final MLP was successfully rerun after restarting the kernel
-and skipping Section 3, confirming that final training and
-evaluation do not depend on the hyperparameter-search cells.
+See the [recorded comparison and limitations](../docs/RESULTS_AND_LIMITATIONS.md). These are coursework-split results, not official MedMNIST benchmark numbers or clinical performance claims. Data and embedded example-image outputs are attributed in [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md); model authorship is recorded in [CONTRIBUTIONS.md](../docs/CONTRIBUTIONS.md).
